@@ -90,31 +90,26 @@ The sections below give more details of each component.
 
 ### UI component
 
-<img src="images/UiClassDiagram.png" width="800"><br>
+<img src="images/developer-guide-ui.png" width="800"><br>
 
-**API** : [`Ui.java`](../src/main/java/seedu/address/ui/Ui.java)
-
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`,
-`StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow` inherits from the abstract `UiPart` class
-and they can be loaded using the `UiPartLoader`.
+The `UI` consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `HomeTab`, `ConsoleView` etc. All these, including the `MainWindow` inherits from the abstract `UiPart` class and they can be loaded using the `UiPartLoader`.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
- that are in the `src/main/resources/view` folder.<br>
+ that are in the `src/main/resources/view` folder.
+
  For example, the layout of the [`MainWindow`](../src/main/java/seedu/address/ui/MainWindow.java) is specified in
  [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
-* Executes user commands using the `Logic` component.
-* Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
-* Responds to events raises from various parts of the App and updates the UI accordingly.
+- Executes user commands using the `Logic` component.
+- Binds itself to some data in the `Model` so that the UI can handle changes when data in the `Model` change.
+- Responds to events raises from various parts of the App and updates the UI accordingly ([Google EventBus](https://github.com/google/guava/wiki/EventBusExplained)).
 
 ### Logic component
 
-<img src="images/LogicClassDiagram.png" width="800"><br>
+<img src="images/developer-guide-logic.png" width="800"><br>
 
-**API** : [`Logic.java`](../src/main/java/seedu/address/logic/Logic.java)
-
-1. `Logic` uses the `Parser` class to parse the user command.
+1. `Logic` uses the `Parser` class to parse the user input command.
 2. This results in a `Command` object which is executed by the `LogicManager`.
 3. The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
 4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`
@@ -274,7 +269,7 @@ Priority | As a ... | I want to ... | So that I can...
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `Schema` and the **Actor** is the `User`, unless specified otherwise)
+(For all use cases below, the **System** is the `Mastermind` and the **Actor** is the `User`, unless specified otherwise)
 
 | # | Use Case | Descriptions  |
 |---|---|---|
