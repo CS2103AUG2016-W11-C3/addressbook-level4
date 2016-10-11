@@ -76,9 +76,9 @@ public abstract class TaskManagerGuiTest {
      * Return null to use the data in the file specified in {@link #getDataFileLocation()}
      */
     protected TaskManager getInitialData() {
-        TaskManager tm = TestUtil.generateEmptyAddressBook();
-        TypicalTestTask.loadTaskManagerWithSampleData(tm);
-        return tm;
+        TaskManager ab = TestUtil.generateEmptyTaskManager();
+        TypicalTestTask.loadTaskManagerWithSampleData(ab);
+        return ab;
     }
 
     /**

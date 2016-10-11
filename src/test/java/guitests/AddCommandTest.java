@@ -15,6 +15,7 @@ public class AddCommandTest extends TaskManagerGuiTest {
     @Test
     //@@author A0124797R
     public void add() {
+
         //add one task
         TestTask[] currentList = td.getTypicalTasks();
         TestTask taskToAdd = td.task1;
@@ -28,6 +29,7 @@ public class AddCommandTest extends TaskManagerGuiTest {
 
         //add duplicate task
         commandBox.runCommand(td.task1.getAddCommand());
+
         assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);
         assertTrue(taskListPanel.isListMatching(currentList));
 

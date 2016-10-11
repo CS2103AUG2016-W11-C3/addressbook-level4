@@ -15,6 +15,8 @@ public class TestTask implements ReadOnlyTask {
     private Date startDate;
     private Date endDate;
     private UniqueTagList tags;
+    
+    private boolean isMarked;
 
     public TestTask() {
         tags = new UniqueTagList();
@@ -36,11 +38,17 @@ public class TestTask implements ReadOnlyTask {
     }
 
 
-    //@@author A0124797R
+    //@@author A0138862W
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
-        sb.append("\"add " + this.getName() + "\" ");
+
+        sb.append("add ");
+        sb.append("name/\""+this.name+"\" ");
+        sb.append("startDate/\"today\" ");
+        sb.append("endDate/\"next friday\" ");
+        
         this.getTags().getInternalList().stream().forEach(s -> sb.append("tags/\"" + s.tagName + "\" "));
+
         return sb.toString();
     }
 
@@ -76,6 +84,16 @@ public class TestTask implements ReadOnlyTask {
     public boolean isEvent() {
         return false;
     }
+
+    public void setTags(UniqueTagList tags) {
+        this.tags = tags;
+    }
+
+    public void setMarked(boolean isMarked) {
+        this.isMarked = isMarked;
+    }
+    
+    
     
     @Override
     public UniqueTagList getTags() {

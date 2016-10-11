@@ -1,5 +1,7 @@
 package harmony.mastermind.testutil;
 
+import java.util.Date;
+
 import harmony.mastermind.commons.exceptions.IllegalValueException;
 import harmony.mastermind.model.tag.Tag;
 import harmony.mastermind.model.task.*;
@@ -26,6 +28,24 @@ public class TaskBuilder {
         for (String tag: tags) {
             task.getTags().add(new Tag(tag));
         }
+        return this;
+    }
+    
+    //@@author A0138863W
+    public TaskBuilder withStartDate(Date startDate){
+        this.task.setStartDate(startDate);
+        return this;
+    }
+
+    //@@author A0138863W
+    public TaskBuilder withEndDate(Date endDate){
+        this.task.setEndDate(endDate);
+        return this;
+    }
+    
+    //@@author A0138863W
+    public TaskBuilder withIsMarked(boolean isMarked){
+        this.task.setMarked(isMarked);
         return this;
     }
 

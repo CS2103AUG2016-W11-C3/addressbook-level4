@@ -65,7 +65,9 @@ public class XmlTaskManagerStorageTest {
         String filePath = testFolder.getRoot().getPath() + "TempTaskManager.xml";
         TypicalTestTask td = new TypicalTestTask();
         TaskManager original = td.getTypicalTaskManager();
+
         XmlTaskManagerStorage xmlTaskManagerStorage = new XmlTaskManagerStorage(filePath);
+
 
         //Save in new file and read back
         xmlTaskManagerStorage.saveTaskManager(original, filePath);

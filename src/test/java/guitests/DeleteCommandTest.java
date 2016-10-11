@@ -40,7 +40,9 @@ public class DeleteCommandTest extends TaskManagerGuiTest {
      * @param currentList A copy of the current list of tasks (before deletion).
      */
     private void assertDeleteSuccess(int targetIndexOneIndexed, final TestTask[] currentList) {
+
         TestTask taskToDelete = currentList[targetIndexOneIndexed-1]; //-1 because array uses zero indexing
+
         TestTask[] expectedRemainder = TestUtil.removeTaskFromList(currentList, targetIndexOneIndexed);
 
         commandBox.runCommand("delete " + targetIndexOneIndexed);
