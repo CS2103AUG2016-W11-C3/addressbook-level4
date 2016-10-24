@@ -49,7 +49,7 @@ _Format:_
 help
 ```
 
-> Help is also shown if you enter an invalid command e.g. `abcd`
+> Help .will be shown in a pop up. Press any key to close the pop up.
 
 ### Adding a task: `add`, `do`
 

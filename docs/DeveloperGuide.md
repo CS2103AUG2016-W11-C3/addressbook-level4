@@ -390,7 +390,7 @@ Priority | As a ... | I want to ... | So that I can...
 
 ### UC1: Display help
 
-Display help when requested, or when user enter an invalid command.
+Display help when requested.
 
 ##### Main Success Scenario:
 
