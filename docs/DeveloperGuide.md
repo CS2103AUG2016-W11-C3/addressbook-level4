@@ -18,7 +18,7 @@
 ## Introduction
 Welcome to Mastermind Developer Guide!  
 
-Mastermind is a to-do task manager that helps the user to keep track of their tasks. We aim to provide our users with an effective and efficient solution to managing their tasks so they are able to better handle their time, as well as completing tasks required. 
+Mastermind is a to-do task manager that helps the user to keep track of their tasks. We aim to provide our users with an effective and efficient solution to managing their tasks so they are able to better handle their time, as well as completing tasks required.
 
 
 ## Target Audience
@@ -26,7 +26,7 @@ This developer guide is for both existing and new developers of the team who are
 
 This guide will be showing you the Product Architecture, APIs and the details regarding the different components.  
 
-The next segment will show you how to set-up to make sure that you have the necessary tools before getting started, so do remember to read them! Feel free to approach our team for any clarifications that you may face during the process. Good luck and have fun coding! 
+The next segment will show you how to set-up to make sure that you have the necessary tools before getting started, so do remember to read them! Feel free to approach our team for any clarifications that you may face during the process. Good luck and have fun coding!
 
 
 ## Setting up
@@ -75,7 +75,7 @@ Reason: Required libraries may not have been downloaded during the project impor
 
 To start off, let us introduce you to the overall structure of Mastermind. Do have a basic understanding of Mastermind's different components before focusing on them individually.  
 
-Mastermind is split up into 5 main components, namely the `UI`, `Logic`, `Model`, `Storage` and `Commons`, as shown below, in Figure 1. 
+Mastermind is split up into 5 main components, namely the `UI`, `Logic`, `Model`, `Storage` and `Commons`, as shown below, in Figure 1.
 
 
 <img src="images/Architecture_diagram.png" width="600">  
@@ -131,7 +131,7 @@ The `UI` component,
 * Responds to events raises from various parts of the App and updates the UI accordingly.
 
 #### Logic component
-Logic is the brain of the application as it controls and manages the overall flow of the application. Upon receiving the user input from UI, it will process the input using the parser and return the result of executing the user input back to the UI. The inputs Logic take in are command words such as add, edit, delete, etc., and executes them accordingly based on their functionality. If you were to work on this execution of user input, you will need to access Storage through the EventsCenter to retrieve and update state of tasks. 
+Logic is the brain of the application as it controls and manages the overall flow of the application. Upon receiving the user input from UI, it will process the input using the parser and return the result of executing the user input back to the UI. The inputs Logic take in are command words such as add, edit, delete, etc., and executes them accordingly based on their functionality. If you were to work on this execution of user input, you will need to access Storage through the EventsCenter to retrieve and update state of tasks.
 
 <img src="images/Logic_diagram.png" width="800">  
 
@@ -143,7 +143,7 @@ Logic is the brain of the application as it controls and manages the overall flo
 4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`
 
 
-##### Add 
+##### Add
 The add class allows the user to add tasks, deadlines or events to Mastermind. Tasks, deadlines and events are different objects. They are being stored as object attributes such as name, description, end date, start date and type.  
 
 You can refer to Figure 4 and Figure 5 below and the next page for the class diagram of Add.
@@ -172,21 +172,21 @@ And EventsCeneter reacts to the event accordingly.
 <img src="images/Delete Command Sequence Diagram part 2.png" width="800">  
 
 
-##### Clear 
+##### Clear
 Clear wipes all tasks currently registered in Mastermind.  
 
 The user can delete the objects either at the homepage, deadlines, tasks or events tabs. The user is required to choose the correct index of the object.  
- 
+
 After inputing the command, the data is cleared from the Storage.   
 
 
-##### Edit 
+##### Edit
 This is also to allow the user to update attributes of items he has already added in Mastermind.  
 
-The user can update the task by choosing the index of the task they want to change. They will then choose the specific field such as start date that they want to change. 
+The user can update the task by choosing the index of the task they want to change. They will then choose the specific field such as start date that they want to change.
 If there are multiple items, this is resolved by looking at the description of the task displayed to the user, allowing the user to choose the correct task instead.  
 
-However, the user can only update one item at a time. To update, the item being updated must be found, and removed from the Storage. After updating the attribute, the item is re-added back into Storage. If the update is successful, the details of the item will be printed and it will be shown to the user the new updates. Otherwise, an error message is generated. 
+However, the user can only update one item at a time. To update, the item being updated must be found, and removed from the Storage. After updating the attribute, the item is re-added back into Storage. If the update is successful, the details of the item will be printed and it will be shown to the user the new updates. Otherwise, an error message is generated.
 
 The details are shown in the following diagrams.
 
@@ -195,6 +195,9 @@ The details are shown in the following diagrams.
 2 events are raised during the execution of Edit.
 
 <img src="images/Edit Command Sequence Diagram part 2.png" width="800">  
+
+##### Undo/Redo
+![developer-guide-undo-command-class-diagram](https://cdn.rawgit.com/CS2103AUG2016-W11-C3/main/documentation/svg-files-test/docs/images/developer-guide-undo-command-class-diagram.svg)
 
 ##### Exit
 This `exit` command runs when the user tries to exit the program, allowing the program to close.
@@ -205,7 +208,7 @@ To find an item, the user will search through the Storage by calling "find `task
 
 
 ##### Mark
-The `mark` command allows users to mark their tasks/deadlines/events as completed. This removes the task from the tasks/deadlines/events field, and moves it into the Archive. The `mark` command will not delete the task immediately. In the event that users want to unmark the task, users can do so due to using the `unmark` Command. 
+The `mark` command allows users to mark their tasks/deadlines/events as completed. This removes the task from the tasks/deadlines/events field, and moves it into the Archive. The `mark` command will not delete the task immediately. In the event that users want to unmark the task, users can do so due to using the `unmark` Command.
 
 
 ### Model component
@@ -233,7 +236,7 @@ The `Storage` component,
 ### Common classes
 
 Classes used by multiple components are in the `harmony.mastermind.commons` package.
-This component will be maintained by developers working on any of the other components because of its wide scope of application. You can find 4 packages, namely: core, events, exceptions and utils. 
+This component will be maintained by developers working on any of the other components because of its wide scope of application. You can find 4 packages, namely: core, events, exceptions and utils.
 
 ## Implementation
 
