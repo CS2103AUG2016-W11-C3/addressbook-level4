@@ -51,8 +51,7 @@ public class FindCommand extends Command {
     }
 
     //@@author A0143378Y
-    // Driver for recursive searching of array of keywords
-    // Returns ArrayList of GenericEvents found containing keywords in their name or description
+    // Returns ArrayList of GenericMemory found containing keywords in their name or description
     public static ArrayList<GenericMemory> searchTerms(String[] keywords, Memory memory) {
         ArrayList<GenericMemory> result = new ArrayList<GenericMemory>(memory.getList());
         findResult = recursiveSearchTerms(keywords, 0, result); // calls recursive search to narrow down results
@@ -106,7 +105,7 @@ public class FindCommand extends Command {
 
             if (testTwoCalendar(date, start) || // Checks if given date is equals or between item's start and end date
                     testTwoCalendar(date, end) ||
-                    (date.after(start) && date.before(end)) ) {
+                    (date.after(start) && date.before(end))) {
                 findResult.add(memory.get(i));
             }
         }
