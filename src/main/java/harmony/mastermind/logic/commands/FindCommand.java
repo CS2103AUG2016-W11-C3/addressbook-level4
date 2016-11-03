@@ -37,7 +37,6 @@ public class FindCommand extends Command {
     @Override
     public CommandResult execute() {
         model.updateFilteredTaskList(keywords);
-//        model.searchTask(keywords.toString());
         return new CommandResult(COMMAND_WORD, getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
     }
     
@@ -112,6 +111,20 @@ public class FindCommand extends Command {
         }
 
         return findResult;
+    }
+    
+    //@@author A0143378Y
+    //Only for delete and update direct commands to search for exact matching names
+    //Should only return list of 1 item ideally 
+    public static ArrayList<GenericMemory> searchExact(String keyword, Memory memory) { 
+        assert keyword.length() != 0;
+        ArrayList<GenericMemory> exactResult = new ArrayList<GenericMemory>();
+        
+        for (int i = 0; i < memory.getSize(); i++) { 
+            containsKeyword(keyword, memory, exactResult, i);
+        }
+        
+        return exactResult;
     }
 
     //@@author A0143378Y
