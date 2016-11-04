@@ -89,7 +89,6 @@ public class ParserSearch extends Parser{
      * Set command type
      */
     private static void setSearchType(String[] details) {
-        
         if(command.contains("date")&&(details.length == 2)){
             setType(SEARCH_DATE);
         }else if(details.length >= 1 && command.trim().length() !=0){

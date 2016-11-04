@@ -55,6 +55,7 @@ public class FindCommand extends Command {
     public static ArrayList<GenericMemory> searchTerms(String[] keywords, Memory memory) {
         ArrayList<GenericMemory> result = new ArrayList<GenericMemory>(memory.getList());
         findResult = recursiveSearchTerms(keywords, 0, result); // calls recursive search to narrow down results
+        
         if (findResult.size() == 0) { // no results
             System.out.println("No items found");
         } else if (findResult.size() == 1) { // one result, display item
