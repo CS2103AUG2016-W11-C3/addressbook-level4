@@ -26,6 +26,8 @@ public class FindCommand extends Command {
             + "\n" + COMMAND_WORD + " KEYWORD" + "\n" +  "\n" + "Searching for a task based on date:" + 
             "\n" + COMMAND_WORD + " DATE in DDMMYY format";
 
+    public static final String FIND_SUCCESS = "Found with keyword(s): %1$s";
+
     private final Set<String> keywords;
     public static ArrayList<GenericMemory> findResult;
     Memory memory;
@@ -38,6 +40,7 @@ public class FindCommand extends Command {
     public CommandResult execute() {
         model.updateFilteredTaskList(keywords);
         return new CommandResult(COMMAND_WORD, getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
+//        return new CommandResult(COMMAND_WORD, String.format(FIND_SUCCESS, keywords));
     }
     
     //@@author A0143378Y
