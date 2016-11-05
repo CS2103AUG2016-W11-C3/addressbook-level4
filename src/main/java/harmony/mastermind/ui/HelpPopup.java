@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import harmony.mastermind.logic.HelpPopupEntry;
 import javafx.scene.Node;
-import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyEvent;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
@@ -22,7 +21,7 @@ public class HelpPopup extends UiPart {
 
     private final String COMMAND_COL_HEADER = "Command";
     private final String FORMAT_COL_HEADER = "Format";
-    private final String USAGE_COL_HEADER = "Usage";
+    private final String DESCRIPTION_COL_HEADER = "Description";
     
     private final int COMMAND_COL_MIN_WIDTH = 100;
     private final int FORMAT_COL_MIN_WIDTH = 200;
@@ -41,7 +40,7 @@ public class HelpPopup extends UiPart {
     TableColumn<HelpPopupEntry, String> formatCol;
     TableColumn<HelpPopupEntry, String> usageCol;
     
-    ObservableList<HelpPopupEntry> entries;
+    private ObservableList<HelpPopupEntry> entries;
     
     //@@author A0139194X
     public HelpPopup() {
@@ -68,6 +67,10 @@ public class HelpPopup extends UiPart {
     @Override
     public String getFxmlPath() {
         return FXML;
+    }
+    
+    public ObservableList<HelpPopupEntry> getEntries() {
+        return this.entries;
     }
     
     //@@author A0139194X
@@ -110,7 +113,7 @@ public class HelpPopup extends UiPart {
     
     //@@author A0139194X
     private void initUsageCol() {
-        usageCol = new TableColumn<HelpPopupEntry, String>(USAGE_COL_HEADER);
+        usageCol = new TableColumn<HelpPopupEntry, String>(DESCRIPTION_COL_HEADER);
         usageCol.setMinWidth(USAGE_COL_MIN_WIDTH);
         usageCol.setCellValueFactory(entry -> new ReadOnlyStringWrapper(entry.getValue().getDescription()));
     }
