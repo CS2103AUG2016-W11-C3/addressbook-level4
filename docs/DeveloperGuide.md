@@ -773,12 +773,12 @@ Unmark a task entry by index.
 
 ### UC12: Clear everything
 
-System performs bulk delete on the data (Deadlines, events, tasks).
+System performs bulk delete on the data (Deadlines, events, floating tasks).
 ##### Main Success Scenario
 
-1. User requests to clear Mastermind
+1. User requests to clear Mastermind.
 
-2. System proceed to perform bulk action described in UC6 for the specified category.
+2. System proceeds to clear all tasks and reset both the undo and redo stacks.
 
 3. Use case ends.
 
