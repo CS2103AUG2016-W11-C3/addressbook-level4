@@ -372,7 +372,7 @@ Priority | As a ... | I want to ... | So that I can...
 
 | # | Use Case | Descriptions  |
 |---|---|---|
-| [UC1](#uc1-display-help) | Display Help  | Display help when requested, or when user enter an invalid command. |
+| [UC1](#uc1-display-help) | Display Help  | Display help when requested. |
 | [UC2](#uc2-adddo-a-task) | Add/Do a Task  | Adding a task. A task can be concrete (have defined date/time) or floating (without date/time). |
 | [UC3](#uc3-lists-tasks) | Lists Tasks  | Display lists of tasks added into the System. |
 | [UC4](#uc4-find-tasks) | Find Tasks  | Search for task by specifying parameters with keywords. |
@@ -400,7 +400,9 @@ Display help when requested, or when user enter an invalid command.
 
 2. System display the help manual.
 
-3. Use case ends.
+3. User presses any button to close the help popup.
+
+4. Use case ends.
 
 ##### Extensions
 
