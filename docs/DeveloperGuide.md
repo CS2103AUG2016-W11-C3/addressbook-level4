@@ -794,7 +794,7 @@ System performs bulk delete on the data (Deadlines, events, floating tasks).
 
 ### UC13: Relocate storage location
 
-Change the current storage to other directory specified by the user.
+Change the current storage to another directory specified by the user.
 
 ##### Main Success Scenario
 
@@ -802,7 +802,7 @@ Change the current storage to other directory specified by the user.
 
 2. System change the storage directory according to user input.
 
-3. System copy current storage to the new location.
+3. System copies current storage to the new location.
 
 4. System deletes old file at old storage location.
 
@@ -814,21 +814,21 @@ Change the current storage to other directory specified by the user.
 
 1a. User entered an invalid command.
 
-* 1a1. System display unsuccessful message.
+* 1a1. System displays invalid command entered.
 
 * 1a2. Use case ends.
 
 2a. Invalid storage location.
 
-* 2a1. System display unsuccessful message.
+* 2a1. System displays invalid file path entered.
 
 * 2a2. Use case ends.
 
 2b. Storage location is not accessible/writable.
 
-* 2a1. System display unsuccessful message.
+* 2b1. System displays file is not writtable.
 
-* 2a2. Use case ends.
+* 2b2. Use case ends.
 
 ---
 
