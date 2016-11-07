@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 import org.apache.commons.csv.CSVFormat;
@@ -15,6 +16,7 @@ import org.apache.commons.csv.CSVRecord;
 import biweekly.Biweekly;
 import biweekly.ICalendar;
 import biweekly.component.VEvent;
+import harmony.mastermind.commons.core.LogsCenter;
 import harmony.mastermind.commons.exceptions.IllegalValueException;
 import harmony.mastermind.commons.exceptions.InvalidEventDateException;
 import harmony.mastermind.model.task.Task;
@@ -27,6 +29,8 @@ import harmony.mastermind.model.task.UniqueTaskList.DuplicateTaskException;
  * Reads either ics/csv/txt file and import the tasks into Mastermind
  */
 public class ImportCommand extends Command {
+    
+    private static final Logger logger = LogsCenter.getLogger(ImportCommand.class);
     private static final int HEADER_LINE = 1;
     private static final int INDEX_NAME = 0;
     private static final int INDEX_START_DATE = 1;
@@ -263,15 +267,25 @@ public class ImportCommand extends Command {
                 Task task = parseTask(event);
                 model.addTask(task);
             }
+            
+            logger.info("Importing .ics file:" + MESSAGE_IMPORT_ICS_SUCCESS);
 
             return new CommandResult(COMMAND_WORD, MESSAGE_IMPORT_ICS_SUCCESS);
         } catch (DuplicateTaskException e){
+            
+            logger.warning(e.getMessage());
+            
             return new CommandResult(COMMAND_WORD, MESSAGE_FAILURE_DUPLICATE_TASK);
         } catch (InvalidEventDateException | IOException | IllegalValueException e) {
+            
+            logger.warning(e.getMessage());
+            
             return new CommandResult(COMMAND_WORD, MESSAGE_IMPORT_ICS_FAILURE);
         }
     }
     
+    
+    //@@author A0138862W
     /**
      * This method will attempt to parse a ical's VEvent to a Mastermind Task Object
      * 

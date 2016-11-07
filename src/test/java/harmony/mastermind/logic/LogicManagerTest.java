@@ -327,19 +327,19 @@ public class LogicManagerTest {
     //@@author A0138862W
     public void execute_undo_invalidEditDuplicate() throws Exception{
         TestDataHelper helper = new TestDataHelper();
-        Task task1 = helper.generateTaskWithName("edited2 task name");
-        Task task2 = helper.generateTaskWithName("edited2 task name");
+        Task firstTask = helper.generateTaskWithName("edited2 task name");
+        Task duplicateTask = helper.generateTaskWithName("edited2 task name");
         
-        List<Task> twoTasks = helper.generateTaskList(task1);
+        List<Task> twoTasks = helper.generateTaskList(firstTask);
         TaskManager expectedTM = helper.generateTaskManager(twoTasks);
         List<Task>expectedList = twoTasks;
         
-        model.addTask(task1);
+        model.addTask(firstTask);
 
         logic.execute(helper.generateEditCommand());
 
-        model.getTaskManager().getUniqueTaskList().getInternalList().add(task1);
-        model.getTaskManager().getUniqueTaskList().getInternalList().add(task2);
+        model.getTaskManager().getUniqueTaskList().getInternalList().add(firstTask);
+        model.getTaskManager().getUniqueTaskList().getInternalList().add(duplicateTask);
         
         assertCommandBehavior("undo", "Undo successfully.\n"
                 + "=====Undo Details=====\n"
@@ -353,17 +353,17 @@ public class LogicManagerTest {
     //@@author A0138862W
     public void execute_undo_invalidDeleteDuplicate() throws Exception{
         TestDataHelper helper = new TestDataHelper();
-        Task task1 = helper.generateTaskWithName("edited2 task name");
-        Task task2 = helper.generateTaskWithName("edited2 task name");
+        Task firstTask = helper.generateTaskWithName("edited2 task name");
+        Task duplicateTask = helper.generateTaskWithName("edited2 task name");
         
-        List<Task> twoTasks = helper.generateTaskList(task1);
+        List<Task> twoTasks = helper.generateTaskList(firstTask);
         
-        model.addTask(task1);
+        model.addTask(firstTask);
 
         logic.execute("delete 1");
 
-        model.getTaskManager().getUniqueTaskList().getInternalList().add(task1);
-        model.getTaskManager().getUniqueTaskList().getInternalList().add(task2);
+        model.getTaskManager().getUniqueTaskList().getInternalList().add(firstTask);
+        model.getTaskManager().getUniqueTaskList().getInternalList().add(duplicateTask);
         
         assertCommandBehavior("undo", "Undo successfully.\n"
                 + "=====Undo Details=====\n"
