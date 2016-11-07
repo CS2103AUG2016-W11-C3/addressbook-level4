@@ -6,11 +6,9 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
-import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 import harmony.mastermind.commons.core.EventsCenter;
-import harmony.mastermind.commons.core.LogsCenter;
 import harmony.mastermind.commons.core.Messages;
 import harmony.mastermind.commons.core.UnmodifiableObservableList;
 import harmony.mastermind.commons.events.ui.HighlightLastActionedRowRequestEvent;
@@ -30,8 +28,6 @@ import harmony.mastermind.model.task.UniqueTaskList.TaskNotFoundException;
  *
  */
 public class EditCommand extends Command implements Undoable, Redoable {
-    
-    private static final Logger logger = LogsCenter.getLogger(EditCommand.class);
 
     public static final String COMMAND_KEYWORD_EDIT = "edit";
     public static final String COMMAND_KEYWORD_UPDATE = "update";
@@ -128,8 +124,6 @@ public class EditCommand extends Command implements Undoable, Redoable {
             model.pushToRedoHistory(this);
             
             requestHighlightLastActionedRow((Task)originalTask);
-            
-            logger.info("Undoing EditCommand:" + String.format(MESSAGE_UNDO_SUCCESS, editedTask));
 
             return new CommandResult(COMMAND_KEYWORD_EDIT, String.format(MESSAGE_UNDO_SUCCESS, originalTask));
         } catch (UniqueTaskList.TaskNotFoundException pne) {
@@ -154,8 +148,6 @@ public class EditCommand extends Command implements Undoable, Redoable {
             model.pushToUndoHistory(this);
             
             requestHighlightLastActionedRow(editedTask);
-            
-            logger.info("Redoing EditCommand:" + String.format(MESSAGE_REDO_SUCCESS, editedTask));
 
             return new CommandResult(COMMAND_KEYWORD_EDIT, String.format(MESSAGE_REDO_SUCCESS, originalTask));
         } catch (TaskNotFoundException | IndexOutOfBoundsException ie) {

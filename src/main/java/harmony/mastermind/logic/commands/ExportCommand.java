@@ -6,21 +6,17 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 
-import harmony.mastermind.commons.core.LogsCenter;
 import harmony.mastermind.commons.core.UnmodifiableObservableList;
 import harmony.mastermind.model.task.ReadOnlyTask;
 
 //@@author A0138862W
 public class ExportCommand extends Command {
 
-    private static final Logger logger = LogsCenter.getLogger(ExportCommand.class);
-    
     public static final String COMMAND_KEYWORD_EXPORT = "export";
 
     public static final String COMMAND_ARGUMENTS_REGEX = "(?:(?=.*(?<tasks>tasks)))?"
@@ -91,14 +87,8 @@ public class ExportCommand extends Command {
             printDeadlines(csvPrinter);
             printEvents(csvPrinter);
             printArchives(csvPrinter);
-            
-            logger.info(MESSAGE_SUCCESS);
-            
             return new CommandResult(COMMAND_KEYWORD_EXPORT, MESSAGE_SUCCESS);
         } catch (IOException e) {
-            
-            logger.warning(e.getMessage());
-            
             return new CommandResult(COMMAND_KEYWORD_EXPORT, MESSAGE_FAILURE);
         }
     }

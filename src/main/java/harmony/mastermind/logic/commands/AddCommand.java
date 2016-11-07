@@ -4,10 +4,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
-import harmony.mastermind.commons.core.LogsCenter;
 import harmony.mastermind.commons.core.Messages;
 import harmony.mastermind.commons.exceptions.IllegalValueException;
 import harmony.mastermind.commons.exceptions.InvalidEventDateException;
@@ -20,7 +18,6 @@ import harmony.mastermind.model.task.Task;
 import harmony.mastermind.model.task.TaskBuilder;
 import harmony.mastermind.model.task.UniqueTaskList;
 import harmony.mastermind.model.task.UniqueTaskList.DuplicateTaskException;
-import harmony.mastermind.ui.UiManager;
 
 /**
  * Adds a task to the task manager.
@@ -29,8 +26,6 @@ import harmony.mastermind.ui.UiManager;
 // @@author A0138862W
 public class AddCommand extends Command implements Undoable, Redoable {
 
-    private static final Logger logger = LogsCenter.getLogger(AddCommand.class);
-    
     public static final String COMMAND_KEYWORD_ADD = "add";
     public static final String COMMAND_KEYWORD_DO = "do";
     
@@ -227,8 +222,6 @@ public class AddCommand extends Command implements Undoable, Redoable {
             model.deleteTask(toAdd);
             
             model.pushToRedoHistory(this);
-            
-            logger.info("Undoing AddCommand:" + String.format(MESSAGE_UNDO_SUCCESS, toAdd));
 
             return new CommandResult(COMMAND_KEYWORD_ADD,String.format(MESSAGE_UNDO_SUCCESS, toAdd));
         } catch (UniqueTaskList.TaskNotFoundException pne) {
@@ -247,8 +240,6 @@ public class AddCommand extends Command implements Undoable, Redoable {
             model.pushToUndoHistory(this);
             
             requestHighlightLastActionedRow(toAdd);
-            
-            logger.info("Redoing AddCommand:" + String.format(MESSAGE_REDO_SUCCESS, toAdd));
 
             return new CommandResult(COMMAND_KEYWORD_ADD,String.format(MESSAGE_REDO_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {

@@ -1,16 +1,12 @@
 package harmony.mastermind.ui;
 
-import java.util.logging.Logger;
-
 import org.ocpsoft.prettytime.PrettyTime;
 
 import com.google.common.eventbus.Subscribe;
 
-import harmony.mastermind.commons.core.LogsCenter;
 import harmony.mastermind.commons.events.ui.HighlightLastActionedRowRequestEvent;
 import harmony.mastermind.commons.util.FxViewUtil;
 import harmony.mastermind.logic.Logic;
-import harmony.mastermind.logic.commands.ExportCommand;
 import harmony.mastermind.model.task.ReadOnlyTask;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -24,8 +20,6 @@ import javafx.stage.Stage;
 
 //@@author A0138862W
 public class HomeTableView extends DefaultTableView {
-    
-    private static final Logger logger = LogsCenter.getLogger(HomeTableView.class);
     
     private static final String FXML = "HomeTableView.fxml";
     
@@ -186,7 +180,6 @@ public class HomeTableView extends DefaultTableView {
  // @@author A0138862W
     @Subscribe
     public void highlightLastActionedRow(HighlightLastActionedRowRequestEvent event){
-        logger.info("highlightLastActionRow: highlighting " + event.task.getName());
         homeTableView.getSelectionModel().select(event.task);
         homeTableView.scrollTo(event.task);
     }

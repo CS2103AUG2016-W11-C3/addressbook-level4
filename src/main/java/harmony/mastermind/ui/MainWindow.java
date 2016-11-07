@@ -175,27 +175,11 @@ public class MainWindow extends UiPart {
         tabLst = tabPane.getTabs();
         updateTabTitle();
 
-        configureComponents(logic);
-
-        registerAsAnEventHandler(this);
-    }
-
-    //@@author A0138862W
-    /**
-     * 
-     * This method handles initialization of components
-     * 
-     * @param logic the Logic Manager
-     */
-    private void configureComponents(Logic logic) {
-        // Define sorting algorithm
-        // Using TaskListComparator to sort by creation date
         SortedList<ReadOnlyTask> sortedTasks = logic.getFilteredTaskList().sorted();
         Comparator<ReadOnlyTask> comparator = new TaskListComparator();
         sortedTasks.setComparator(comparator);
         sortedTasks.comparatorProperty().bind(homeTableView.getTableView().comparatorProperty());
 
-        // placeholder text when table is empty
         Label placeholder = new Label("What's on your mind?\nTry adding a new task by executing \"add\" command!");
         placeholder.setAlignment(Pos.CENTER);
         placeholder.setTextAlignment(TextAlignment.CENTER);
@@ -215,12 +199,12 @@ public class MainWindow extends UiPart {
         archivesTableView.getTableView().setPlaceholder(placeholder);
         archivesTableView.getTableView().setItems(logic.getFilteredArchiveList());
         
-        // listen to tab change. broadcast this event through EventCenter 
         tabPane.getSelectionModel().selectedItemProperty().addListener((tabList, fromTab, toTab)->{
             this.raise(new TabChangedEvent(fromTab.getId(), toTab.getId()));
         });
+
+        registerAsAnEventHandler(this);
     }
-    //@@author
 
     public void hide() {
         primaryStage.hide();
@@ -334,7 +318,6 @@ public class MainWindow extends UiPart {
     @Subscribe
     private void handleNewResultAvailableEvent(NewResultAvailableEvent event){
         // updates the tab when a list command is called
-        logger.info("handleNewResultAvailableEvent: Updating tabs...");
         this.updateTab(event.message);
     }
     //@@author

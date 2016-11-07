@@ -9,11 +9,8 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import java.util.logging.Logger;
-
 import com.google.common.eventbus.Subscribe;
 
-import harmony.mastermind.commons.core.LogsCenter;
 import harmony.mastermind.commons.events.ui.ExecuteCommandEvent;
 import harmony.mastermind.commons.events.ui.NewResultAvailableEvent;
 import harmony.mastermind.commons.events.ui.ToggleActionHistoryEvent;
@@ -23,7 +20,6 @@ import javafx.fxml.FXML;
 
 public class ActionHistoryPane extends UiPart {
 
-    private static final Logger logger = LogsCenter.getLogger(ActionHistoryPane.class);
     
     private static final String FXML = "ActionHistoryPane.fxml";
     
@@ -84,49 +80,44 @@ public class ActionHistoryPane extends UiPart {
             consoleOutput.setText(actionHistory.getSelectionModel().getSelectedItem().getDescription());
         });
         
-        actionHistory.setCellFactory(listView -> renderActionHistoryTableCell());
+        actionHistory.setCellFactory(listView -> {
+            ListCell<ActionHistory> actionCell = new ListCell<ActionHistory>() {
+
+                @Override
+                protected void updateItem(ActionHistory item, boolean isEmpty) {
+                    super.updateItem(item, isEmpty);
+
+                    if (!isEmpty) {
+
+                        ActionHistoryEntry actionHistoryEntry = UiPartLoader.loadUiPart(new ActionHistoryEntry());
+
+                        actionHistoryEntry.setTitle(item.getTitle().toUpperCase());
+                        actionHistoryEntry.setDate(item.getDateActioned().toString().toUpperCase());
+
+                        if (item.getTitle().toUpperCase().equals("INVALID COMMAND")) {
+                            actionHistoryEntry.setTypeFail();
+                        } else {
+                            actionHistoryEntry.setTypeSuccess();
+                        }
+
+                        this.setGraphic(actionHistoryEntry.getNode());
+
+                        this.setPrefHeight(50);
+                        this.setPrefWidth(250);
+
+                        this.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+                    } else {
+                        this.setGraphic(null);
+                    }
+                }
+            };
+
+            return actionCell;
+        });
         
         
     }
     //@@author
-
-    //@@author A0138862W
-    /**
-     * define logic to render action history entries
-     * @return
-     */
-    private ListCell<ActionHistory> renderActionHistoryTableCell() {
-        return new ListCell<ActionHistory>() {
-
-            @Override
-            protected void updateItem(ActionHistory item, boolean isEmpty) {
-                super.updateItem(item, isEmpty);
-
-                if (!isEmpty) {
-
-                    ActionHistoryEntry actionHistoryEntry = UiPartLoader.loadUiPart(new ActionHistoryEntry());
-
-                    actionHistoryEntry.setTitle(item.getTitle().toUpperCase());
-                    actionHistoryEntry.setDate(item.getDateActioned().toString().toUpperCase());
-
-                    if (item.getTitle().toUpperCase().equals("INVALID COMMAND")) {
-                        actionHistoryEntry.setTypeFail();
-                    } else {
-                        actionHistoryEntry.setTypeSuccess();
-                    }
-
-                    this.setGraphic(actionHistoryEntry.getNode());
-
-                    this.setPrefHeight(50);
-                    this.setPrefWidth(250);
-
-                    this.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-                } else {
-                    this.setGraphic(null);
-                }
-            }
-        };
-    }
     
     //@@author A0138862W
     public void toggleActionHistory(){
@@ -142,22 +133,16 @@ public class ActionHistoryPane extends UiPart {
     }
     // @@author
     
-    //@@author A0138862W
     @Subscribe
     private void handleNewResultAvailableEvent(NewResultAvailableEvent event){
-        logger.info("handleNewResultAvailableEvent: Push into action history record");
         this.consoleOutput.setText(event.message);
         this.actionHistoryPane.setText(event.message);
         this.pushToActionHistory(event.title, event.message);
     }
-    //@@author
     
-    //@@author A0138862W
     @Subscribe
     private void handleToggleActionHistoryEvent(ToggleActionHistoryEvent event){
-        logger.info("handleToggleActionHistoryEvent: Push into action history record");
         toggleActionHistory();
     }
-    //@@author
     
 }
