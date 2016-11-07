@@ -2,6 +2,7 @@ package harmony.mastermind.ui;
 
 import org.ocpsoft.prettytime.PrettyTime;
 
+import harmony.mastermind.commons.util.AppUtil;
 import harmony.mastermind.commons.util.FxViewUtil;
 import harmony.mastermind.logic.Logic;
 import harmony.mastermind.model.task.ReadOnlyTask;
@@ -156,7 +157,8 @@ public class TasksTableView extends DefaultTableView {
      */
     protected void initRecur() {
         recurColumn.prefWidthProperty().bind(tasksTableView.widthProperty().multiply(WIDTH_MULTIPLIER_RECUR));
-        recurColumn.setGraphic(new ImageView("file:src/main/resources/images/recur_white.png"));
+        
+        recurColumn.setGraphic(new ImageView(AppUtil.getImage("/images/recur_white.png")));
         recurColumn.setCellValueFactory(task -> new SimpleBooleanProperty(task.getValue().isRecur()));
         recurColumn.setCellFactory(col -> renderRecurCell());
     }
